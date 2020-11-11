@@ -2,12 +2,14 @@ const Gem ={
 properties :{
     size : 3,
     countMove : 0,
+    time:0,
     continue:false,
 },
 init(){    
     document.body.appendChild(this.countMoveEl()),
     document.body.appendChild(this._reset()),
     document.body.appendChild(this._save()),
+    document.body.appendChild(this._timer()),
     document.body.appendChild(this._continue()),
 
     document.body.appendChild(this.createArena(this.properties.size))
@@ -29,6 +31,7 @@ button.textContent = "reset";
 button.addEventListener("click", ()=>{
     document.body.innerHTML="";
     this.properties.countMove = 0;
+    this.properties.time = 0;
     this.init();
 });
 return button;
@@ -41,6 +44,7 @@ button.addEventListener("click", ()=>{
     this.properties.continue = !this.properties.continue;
     let arena =document.getElementById("arena").innerHTML = localStorage.getItem("arrSave");
     this.properties.countMove = localStorage.getItem("counts");
+    this.properties.time = +localStorage.getItem("time");
     this.properties.size = +localStorage.getItem("size");
     document.body.innerHTML="";
     this.init();
@@ -63,6 +67,7 @@ button.addEventListener("click", ()=>{
     console.log(arr);
     localStorage.setItem("arrSave", arr);
     localStorage.setItem("counts", this.properties.countMove);
+    localStorage.setItem("time", this.properties.time);
     localStorage.setItem("size", this.properties.size);
 });
 return button;
@@ -91,13 +96,15 @@ createArena(sizeArena){
         this.properties.continue=!this.properties.continue;
     
     }
-    console.log(arr);
+    //console.log(arr);
     for(let i=0; i<numGems; i++){
         let gem = document.createElement("div");
         let wrapper = document.createElement("div");
         wrapper.classList.add("wrap");
         wrapper.setAttribute("id" , i+1); 
+        
         gem.classList.add("gem");
+        gem.setAttribute("draggable", "true");
         gem.textContent = arr[i];
         //if(i<numGems-1){wrapper.appendChild(gem);}
         if(arr[i]){wrapper.appendChild(gem);}
@@ -108,9 +115,48 @@ createArena(sizeArena){
             this._victory();
         
         });
+        gem.addEventListener("dragstart",(event)=>{
+            event.target.classList.add("select");
+        })
+        gem.addEventListener("dragend",(event)=>{
+            event.target.classList.remove("select");
+        })
+        wrapper.addEventListener("dragenter",(event)=>{
+            event.preventDefault()
+           
+           
+            //event.target.appendChild(gem).textContent =arr[i];
+        });
+        wrapper.addEventListener("dragover",(event)=>{
+            event.preventDefault();
+          
+        });
+        wrapper.addEventListener("drop",(event)=>{
+            console.log(document.querySelector(`.select`).parentElement);
+           //console.log(event.target.id);
+           this._movebyclick(document.querySelector(`.select`).parentElement.id)
+           // event.target.append(document.querySelector(`.select`));
+          
+        });
 
     }
     return arena;
+},
+_timer(){
+    let el =document.createElement("div");
+    el.setAttribute("id", "timer");
+    setInterval(()=>{
+        this.properties.time++;
+        let seconds =this.properties.time%60;
+        let minuts =this.properties.time/60%60;
+        let str =`${Math.trunc(minuts)} :: ${seconds}`;
+        el.textContent=str;
+    
+    }, 1000);
+   
+    return el;
+
+
 },
 // _addListner(){
 //     console.log(document.getElementsByClassName("gem"));
@@ -140,7 +186,7 @@ _movebyclick(idWrapper){
     let down = document.getElementById(idWrapper+this.properties.size);
     let left = document.getElementById(idWrapper-1);
     let rigt = document.getElementById(idWrapper+1);
-    console.log("xxxxxxxx   "+down + "yyyy" + idWrapper);
+   // console.log("xxxxxxxx   "+down + "yyyy" + idWrapper);
     move(down);
     move(up);
     if(pos!==1){move(left);}
@@ -161,7 +207,7 @@ _victory(){
         }
         
     })
-    console.log(check);
+   // console.log(check);
     if(Math.pow(this.properties.size, 2) -1 ==check){
         alert("ura");
     }
