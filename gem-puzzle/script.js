@@ -1,16 +1,26 @@
 const Gem ={
+    constructor(){
+        this.timer
+    },
 properties :{
     size : 3,
     countMove : 0,
     time:0,
-    continue:false,
+    
+    continue:false
 },
 init(){    
+    window.clearInterval(this._timer);
+    console.log(document.getElementById("timer")),
+   document.body.innerHTML="";
+   
     document.body.appendChild(this.countMoveEl()),
     document.body.appendChild(this._reset()),
     document.body.appendChild(this._save()),
-    document.body.appendChild(this._timer()),
-    document.body.appendChild(this._continue()),
+    
+    document.body.append(this._continue()),
+   document.body.appendChild(this._timer()),
+    window.clearInterval(this._timer);
 
     document.body.appendChild(this.createArena(this.properties.size))
     
@@ -29,7 +39,7 @@ let button = document.createElement("button");
 button.classList.add("button-reset");
 button.textContent = "reset";
 button.addEventListener("click", ()=>{
-    document.body.innerHTML="";
+   // document.body.innerHTML="";
     this.properties.countMove = 0;
     this.properties.time = 0;
     this.init();
@@ -46,7 +56,8 @@ button.addEventListener("click", ()=>{
     this.properties.countMove = localStorage.getItem("counts");
     this.properties.time = +localStorage.getItem("time");
     this.properties.size = +localStorage.getItem("size");
-    document.body.innerHTML="";
+    //document.body.innerHTML="";
+    clearInterval(this._timer.str);
     this.init();
     //this.init();
 });
@@ -142,10 +153,13 @@ createArena(sizeArena){
     }
     return arena;
 },
+//str:setInterval(()=>{this.properties.time++;},1000),
 _timer(){
+   
+    clearInterval(this.timer);
     let el =document.createElement("div");
     el.setAttribute("id", "timer");
-    setInterval(()=>{
+    this.timer = setInterval(()=>{
         this.properties.time++;
         let seconds =this.properties.time%60;
         let minuts =this.properties.time/60%60;
@@ -153,6 +167,7 @@ _timer(){
         el.textContent=str;
     
     }, 1000);
+
    
     return el;
 
@@ -175,6 +190,7 @@ _movebyclick(idWrapper){
                 direction.appendChild(thatEl.firstChild);
                 this.properties.countMove++;
                 document.getElementById("counter").textContent =this.properties.countMove;
+                this._victory();
             }
             //console.log(down.firstChild);
         }
@@ -197,7 +213,7 @@ _movebyclick(idWrapper){
 }, 
 _victory(){
     let check =0;
-    console.log("hell");
+   // console.log("hell");
     let wrap = document.getElementsByClassName("wrap");
     Array.from(wrap).forEach(el =>{
         //console.log(el.id);
@@ -220,4 +236,6 @@ _victory(){
 window.addEventListener("DOMContentLoaded",function(){
 
     Gem.init();
+    //document.body.append(Gem._timer());
+    
 });
