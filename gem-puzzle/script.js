@@ -10,17 +10,19 @@ properties :{
     continue:false
 },
 init(){    
-    window.clearInterval(this._timer);
+    
     console.log(document.getElementById("timer")),
+    
    document.body.innerHTML="";
-   
+   document.body.appendChild(this._chooseYourDestany());
+   document.getElementById("Select1").options.selectedIndex = this.properties.size-3;
     document.body.appendChild(this.countMoveEl()),
     document.body.appendChild(this._reset()),
     document.body.appendChild(this._save()),
     
     document.body.append(this._continue()),
    document.body.appendChild(this._timer()),
-    window.clearInterval(this._timer);
+   
 
     document.body.appendChild(this.createArena(this.properties.size))
     
@@ -228,12 +230,55 @@ _victory(){
         alert("ura");
     }
 },
+_chooseYourDestany(){
+    var size = document.createElement('select');
+    size.name = 'drop1';
+    size.id = 'Select1';
+    
+    var options = [
+      "3*3",
+      "4*4",
+      "5*5",
+      "6*6",
+      "7*7",
+      "8*8",
+    ];
+    
+    var options_str = "";
+    
+    
+    options.forEach( function(op, inex) {
+       
+      options_str += '<option value="' + op[0] + '">' + op + '</option>';
+    });
+    
+    size.innerHTML = options_str;
+    size.addEventListener("change", ()=>{
+        this.properties.size = +size.value;
+        this.properties.time = 0;
+        this.init();
+        console.log(size.value);
+    })
+    return size;
+}
 
 }
 
 
 
 window.addEventListener("DOMContentLoaded",function(){
+//     let sizeGem = document.createElement("header");
+//    // sizeGem.append("key", "value");
+
+//     // sizeGem.append(document.createElement("select"));
+    
+//     // for(let i=3;i<9;i++){
+//     //     let option = document.createElement("option");
+//     //     option.textContent = i;
+//     //     sizeGem.append(option);
+//     // }
+//     document.body.append(sizeGem);///
+
 
     Gem.init();
     //document.body.append(Gem._timer());
