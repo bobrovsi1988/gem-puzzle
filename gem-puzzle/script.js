@@ -12,16 +12,18 @@ properties :{
 },
 init(){    
     
-    console.log(document.getElementById("timer")),
+    
+    //console.log(document.getElementById("timer")),
     
    document.body.innerHTML="";
    document.body.appendChild(this._chooseYourDestany());
+   document.body.appendChild(this._createMenu());
    document.getElementById("Select1").options.selectedIndex = this.properties.size-3;
     document.body.appendChild(this.countMoveEl()),
-    document.body.appendChild(this._reset()),
-    document.body.appendChild(this._save()),
+    // document.body.appendChild(this._reset()),
+    // document.body.appendChild(this._save()),
     
-    document.body.append(this._continue()),
+    // document.body.append(this._continue()),
    document.body.appendChild(this._timer()),
    document.body.appendChild(this._winList()),
 
@@ -29,6 +31,14 @@ init(){
     
      
  
+},
+_createMenu(){
+    let menu = document.createElement("div");
+    menu.classList.add("menu");
+    menu.appendChild(this._reset());
+    menu.appendChild(this._save());
+    menu.appendChild(this._continue());
+    return menu;
 },
 countMoveEl(){
     let count =document.createElement("div");
@@ -248,11 +258,11 @@ _victory(){
     }
 },
 _chooseYourDestany(){
-    var size = document.createElement('select');
-    size.name = 'drop1';
+    let size = document.createElement('select');
+    //size.name = 'drop1';
     size.id = 'Select1';
     
-    var options = [
+    let options = [
       "3*3",
       "4*4",
       "5*5",
@@ -276,18 +286,25 @@ _chooseYourDestany(){
         this.init();
         console.log(size.value);
     })
-    return size;
+
+    let div =document.createElement("div");
+    div.classList.add("sizeArena");
+    div.innerHTML="<h2>choose Your Destany</h2>";
+    div.appendChild(size);
+    return div;
 },
 _winList(){
+    let div =document.createElement('div');
+    div.innerHTML = "<h3>Winners</h3>"
     let list = document.createElement("ol");
-    list.setAttribute("id", "winlist");
+    div.setAttribute("id", "winlist");
     if(localStorage.getItem("winners")===null){return list};
     let arr = localStorage.getItem("winners").split(',').slice(1, 6);
-    console.log("array  "+ arr[0]);
-    //arr.shift();
+    //console.log("array  "+ arr[0]);
+   
 
     arr.sort((a, b)=>{
-        console.log(+a.split(" ")[0]);
+       // console.log(+a.split(" ")[0]);
         return (+a.split(" ")[0])-(+b.split(" ")[0]);
     });
     arr.forEach((winner)=>{
@@ -296,7 +313,8 @@ _winList(){
         list.appendChild(li);
        // console.log(winner.split(" ")[0]);
     })
-    return list
+    div.appendChild(list);
+    return div
 }
 
 }

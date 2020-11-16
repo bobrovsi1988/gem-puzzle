@@ -49,6 +49,28 @@
     padding: 10px;
 
 }
+.menu{
+
+
+}
+#winlist{
+    text-align: center;
+    
+
+    align-self: end;
+}
+.sizeArena{
+    display: flex;
+    align-items: center;
+}
+#Select1{
+    padding: 10px;
+    height: 50px;
+}
 body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     
 }
