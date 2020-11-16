@@ -26,6 +26,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: width 0.5s linear;
+}
+.animate{
+    width: 0%;
 }
 .button-reset{
     border-radius: 10%;

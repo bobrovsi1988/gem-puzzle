@@ -217,11 +217,16 @@ _movebyclick(idWrapper){
         let audio = new Audio('movement_01.mp3');
         if(!(direction === null)){
             if(direction.firstChild === null){
-                direction.appendChild(thatEl.firstChild);
+               thatEl.firstChild.classList.add("animate");
+               setTimeout(()=>{direction.appendChild(thatEl.firstChild)},1000);
+               // direction.appendChild(thatEl.firstChild);
+               setTimeout(()=>{direction.firstChild.classList.remove("animate")},1000);
+                
                 this.properties.countMove++;
                 document.getElementById("counter").textContent =this.properties.countMove;
+                
                 if(this.properties.sound){audio.play();}
-              this._victory();
+                this._victory();
             }
             //console.log(down.firstChild);
         }
