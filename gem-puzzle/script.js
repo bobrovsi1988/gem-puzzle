@@ -7,6 +7,7 @@ properties :{
     size : 3,
     countMove : 0,
     time:0,
+    sound:true,
     
     continue:false
 },
@@ -38,6 +39,7 @@ _createMenu(){
     menu.appendChild(this._reset());
     menu.appendChild(this._save());
     menu.appendChild(this._continue());
+    menu.appendChild(this.soundButton());
     return menu;
 },
 countMoveEl(){
@@ -186,23 +188,39 @@ _timer(){
 
 
 },
-// _addListner(){
-//     console.log(document.getElementsByClassName("gem"));
-//     Array.from(document.getElementsByClassName("gem")).forEach(element => {
-//         element.addEventListener("click",()=>{ 
-//             this._movebyclick(element.parentElement.id);
-        
-//         }
-//         )
-//     });
-// },
+soundButton(){
+    let button =document.createElement("button");
+    button.classList.add("button-reset");
+    button.id = "sound";
+    if(this.properties.sound){
+        button.textContent = "sound On";
+    }else{
+        button.textContent = "sound Off";
+    }
+    button.addEventListener("click", ()=>{
+        this._toogleSound();
+        if(this.properties.sound){
+            button.textContent = "sound On";
+        }else{
+            button.textContent = "sound Off";
+        }
+    })
+    return button;
+},
+_toogleSound(){
+    this.properties.sound =!this.properties.sound;
+
+
+},
 _movebyclick(idWrapper){
     const move = (direction)=>{
+        let audio = new Audio('movement_01.mp3');
         if(!(direction === null)){
             if(direction.firstChild === null){
                 direction.appendChild(thatEl.firstChild);
                 this.properties.countMove++;
                 document.getElementById("counter").textContent =this.properties.countMove;
+                if(this.properties.sound){audio.play();}
               this._victory();
             }
             //console.log(down.firstChild);
