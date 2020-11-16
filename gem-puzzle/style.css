@@ -33,6 +33,22 @@
     height: 50px;
     background-color: aqua;
 }
+.victory{
+    background-color: chartreuse;
+    border: 2px solid aqua;
+    border-radius: 20%;
+    font-size: large;
+    width: 50vt;
+    height: 50px;
+    z-index: 999;
+    position: fixed;
+    top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+}
 body{
     
 }

@@ -1,6 +1,7 @@
 const Gem ={
     constructor(){
-        this.timer
+        this.timer,
+        localStorage.setItem('winners',"")
     },
 properties :{
     size : 3,
@@ -22,7 +23,7 @@ init(){
     
     document.body.append(this._continue()),
    document.body.appendChild(this._timer()),
-   
+   document.body.appendChild(this._winList()),
 
     document.body.appendChild(this.createArena(this.properties.size))
     
@@ -125,7 +126,7 @@ createArena(sizeArena){
 
         gem.addEventListener("click",()=>{ 
             this._movebyclick(gem.parentElement.id);
-            this._victory();
+           // this._victory();
         
         });
         gem.addEventListener("dragstart",(event)=>{
@@ -192,7 +193,7 @@ _movebyclick(idWrapper){
                 direction.appendChild(thatEl.firstChild);
                 this.properties.countMove++;
                 document.getElementById("counter").textContent =this.properties.countMove;
-                this._victory();
+              this._victory();
             }
             //console.log(down.firstChild);
         }
@@ -215,19 +216,35 @@ _movebyclick(idWrapper){
 }, 
 _victory(){
     let check =0;
-   // console.log("hell");
+   //console.log("hell");
     let wrap = document.getElementsByClassName("wrap");
     Array.from(wrap).forEach(el =>{
-        //console.log(el.id);
+        
         if(!(el.firstChild === null)){
+            // console.log("id= "+el.id);
+            // console.log(el.firstChild.textContent);
             el.id==el.firstChild.textContent?check++:check ;
+            //console.log("check : "+check);
 
         }
         
     })
-   // console.log(check);
+    //console.log(check);
     if(Math.pow(this.properties.size, 2) -1 ==check){
-        alert("ura");
+        let stringwin = localStorage.getItem("winners")===null? "":localStorage.getItem("winners");
+        stringwin = stringwin.split(",");
+        stringwin.push(`${this.properties.countMove} moves;${this.properties.size} size; time:${this.properties.time}`);
+        localStorage.setItem("winners", stringwin);
+
+        let seconds =this.properties.time%60;
+        let minuts =this.properties.time/60%60;
+        let str =`${Math.trunc(minuts)} :: ${seconds}`;
+        let elem = document.createElement("div");
+        elem.classList.add("victory");
+        elem.textContent=`Ура! Вы решили головоломку за ${str} и ${this.properties.countMove} ходов`;
+        document.getElementById("arena").appendChild(elem);
+
+        //alert(`Ура! Вы решили головоломку за #:## и ${this.properties.countMove} ходов`);
     }
 },
 _chooseYourDestany(){
@@ -260,6 +277,26 @@ _chooseYourDestany(){
         console.log(size.value);
     })
     return size;
+},
+_winList(){
+    let list = document.createElement("ol");
+    list.setAttribute("id", "winlist");
+    if(localStorage.getItem("winners")===null){return list};
+    let arr = localStorage.getItem("winners").split(',').slice(1, 6);
+    console.log("array  "+ arr[0]);
+    //arr.shift();
+
+    arr.sort((a, b)=>{
+        console.log(+a.split(" ")[0]);
+        return (+a.split(" ")[0])-(+b.split(" ")[0]);
+    });
+    arr.forEach((winner)=>{
+        let li =document.createElement("li");
+        li.textContent= winner;
+        list.appendChild(li);
+       // console.log(winner.split(" ")[0]);
+    })
+    return list
 }
 
 }
