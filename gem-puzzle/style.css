@@ -54,20 +54,23 @@
 
 }
 .menu{
-
+width: 50%;
+display: flex;
+justify-content: space-around;
 
 }
 #winlist{
     text-align: center;
     
 
-    align-self: end;
+   
 }
 .sizeArena{
     display: flex;
     align-items: center;
 }
 #Select1{
+    margin-left: 20px;
     padding: 10px;
     height: 50px;
 }
