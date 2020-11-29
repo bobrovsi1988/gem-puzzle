@@ -140,11 +140,8 @@ const Gem = {
 
             });
             wrapper.addEventListener("drop", (event) => {
-                console.log(document.querySelector(`.select`).parentElement);
-
+               
                 this._movebyclick(document.querySelector(`.select`).parentElement.id)
-
-
             });
 
         }
@@ -248,7 +245,8 @@ const Gem = {
         }
     },
     _sizeArena() {
-        let size = document.createElement('select');        
+        let size = document.createElement('select');
+        size.classList.add("select_size")        
         size.id = 'Select1';
 
         let options = [
@@ -287,6 +285,7 @@ const Gem = {
         div.innerHTML = "<h3>Winners</h3>"
         let list = document.createElement("ol");
         div.setAttribute("id", "winlist");
+        div.classList.add("win_list")
         if (localStorage.getItem("winners") === null) { return list };
         let arr = localStorage.getItem("winners").split(',').slice(1, 6);       
 

@@ -59,17 +59,14 @@ display: flex;
 justify-content: space-around;
 
 }
-#winlist{
+.win_list{
     text-align: center;
-    
-
-   
 }
 .sizeArena{
     display: flex;
     align-items: center;
 }
-#Select1{
+.select_size{
     margin-left: 20px;
     padding: 10px;
     height: 50px;
