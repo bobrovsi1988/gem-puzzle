@@ -27,9 +27,9 @@ const Gem = {
     _createMenu() {
         let menu = document.createElement("div");
         menu.classList.add("menu");
-        menu.appendChild(this._reset());
-        menu.appendChild(this._save());
-        menu.appendChild(this._continue());
+        menu.appendChild(this._resetButton());
+        menu.appendChild(this._saveButton());
+        menu.appendChild(this._continueButton());
         menu.appendChild(this.soundButton());
         return menu;
     },
@@ -40,7 +40,7 @@ const Gem = {
         count.textContent = this.properties.countMove;
         return count;
     },
-    _reset() {
+    _resetButton() {
         let button = document.createElement("button");
         button.classList.add("button-reset");
         button.textContent = "reset";
@@ -51,7 +51,7 @@ const Gem = {
         });
         return button;
     },
-    _continue() {
+    _continueButton() {
         let button = document.createElement("button");
         button.classList.add("button-reset");
         button.textContent = "continue";
@@ -66,7 +66,7 @@ const Gem = {
         });
         return button;
     },
-    _save() {
+    _saveButton() {
         let button = document.createElement("button");
         button.classList.add("button-reset");
         button.textContent = "save";
@@ -227,7 +227,7 @@ const Gem = {
         let wrap = document.getElementsByClassName("wrap");
         Array.from(wrap).forEach(el => {
 
-            if (!(el.firstChild === null)) {               
+            if (el.firstChild !== null) {               
                 el.id == el.firstChild.textContent ? check++ : check;               
             }
         })
