@@ -13,7 +13,7 @@ const Gem = {
     },
     init() {
         document.body.innerHTML = "";
-        document.body.appendChild(this._chooseYourDestany());
+        document.body.appendChild(this._sizeArena());
         document.body.appendChild(this._createMenu());
         document.getElementById("Select1").options.selectedIndex = this.properties.size - 3;
         document.body.appendChild(this.countMoveEl()),
@@ -247,7 +247,7 @@ const Gem = {
             document.getElementById("arena").appendChild(elem);
         }
     },
-    _chooseYourDestany() {
+    _sizeArena() {
         let size = document.createElement('select');        
         size.id = 'Select1';
 
@@ -278,7 +278,7 @@ const Gem = {
 
         let div = document.createElement("div");
         div.classList.add("sizeArena");
-        div.innerHTML = "<h2>choose Your Destany</h2>";
+        div.innerHTML = "<h2>size of Arena</h2>";
         div.appendChild(size);
         return div;
     },
