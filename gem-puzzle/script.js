@@ -145,7 +145,7 @@ const Gem = {
       arena.appendChild(wrapper);
 
       gem.addEventListener('click', () => {
-        this.movebyclick(gem.parentElement.id);
+        this.moveByClick(gem.parentElement.id);
       });
 
       gem.addEventListener('dragstart', (event) => {
@@ -165,7 +165,7 @@ const Gem = {
       });
       
       wrapper.addEventListener('drop', () => {
-        this.movebyclick(document.querySelector('.select').parentElement.id);
+        this.moveByClick(document.querySelector('.select').parentElement.id);
       });
     }
 
@@ -215,7 +215,7 @@ const Gem = {
     this.properties.sound = !this.properties.sound;
   },
 
-  movebyclick(idWrapper) {
+  moveByClick(idWrapper) {
     const move = (direction) => {
       const audio = new Audio('movement_01.mp3');
       if (!(direction === null)) {
