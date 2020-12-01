@@ -260,7 +260,7 @@ const Gem = {
       const seconds = this.properties.time % 60;
       let minuts = this.properties.time / 60;
       minuts %= 60;
-      const str = `${Math.trunc(minuts)} :: ${seconds}`;
+      const str = `${Math.trunc(minuts)} : ${String(seconds).length === 1 ? '0' + seconds : seconds}`;
       const elem = document.createElement('div');
       elem.classList.add('victory');
       elem.textContent = `Ура! Вы решили головоломку за ${str} и ${this.properties.countMove} ходов`;
