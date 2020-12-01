@@ -73,7 +73,7 @@ const Gem = {
       this.properties.countMove = localStorage.getItem('counts');
       this.properties.time = +localStorage.getItem('time');
       this.properties.size = +localStorage.getItem('size');
-      clearInterval(this.timer.str);
+      clearInterval(this.timer);
       this.init();
     });
 
