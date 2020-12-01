@@ -4,6 +4,13 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-plusplus */
 /* eslint-disable linebreak-style */
+const constants = {    
+    RESET_GAME: 'reset',
+    CONTINUE_GAME: 'continue',
+    SAVE_GAME: 'save',
+    
+    };
+
 const Gem = {
   constructor() {
     this.timer;
@@ -52,7 +59,7 @@ const Gem = {
   resetButton() {
     const button = document.createElement('button');
     button.classList.add('button-reset');
-    button.textContent = 'reset';
+    button.textContent = constants.RESET_GAME;
     button.addEventListener('click', () => {
       this.properties.countMove = 0;
       this.properties.time = 0;
@@ -65,7 +72,7 @@ const Gem = {
   continueButton() {
     const button = document.createElement('button');
     button.classList.add('button-reset');
-    button.textContent = 'continue';
+    button.textContent = constants.CONTINUE_GAME;
 
     button.addEventListener('click', () => {
       this.properties.continue = !this.properties.continue;
@@ -83,7 +90,7 @@ const Gem = {
   saveButton() {
     const button = document.createElement('button');
     button.classList.add('button-reset');
-    button.textContent = 'save';
+    button.textContent = constants.SAVE_GAME;
 
     button.addEventListener('click', () => {
       const arr = [];
