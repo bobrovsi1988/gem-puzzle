@@ -9,6 +9,7 @@ const Gem = {
     this.timer;
     localStorage.setItem('winners', '');
   },
+
   properties: {
     size: 3,
     countMove: 0,
@@ -16,6 +17,7 @@ const Gem = {
     sound: true,
     continue: false,
   },
+
   init() {
     document.body.innerHTML = '';
     document.body.appendChild(this.sizeArena());
@@ -26,6 +28,7 @@ const Gem = {
     document.body.appendChild(this.winList());
     document.body.appendChild(this.createArena(this.properties.size));
   },
+
   createMenu() {
     const menu = document.createElement('div');
     menu.classList.add('menu');
@@ -33,15 +36,19 @@ const Gem = {
     menu.appendChild(this.saveButton());
     menu.appendChild(this.continueButton());
     menu.appendChild(this.soundButton());
+
     return menu;
   },
+
   countMoveEl() {
     const count = document.createElement('div');
     count.classList.add('counter');
     count.setAttribute('id', 'counter');
     count.textContent = this.properties.countMove;
+
     return count;
   },
+
   resetButton() {
     const button = document.createElement('button');
     button.classList.add('button-reset');
@@ -51,12 +58,15 @@ const Gem = {
       this.properties.time = 0;
       this.init();
     });
+
     return button;
   },
+
   continueButton() {
     const button = document.createElement('button');
     button.classList.add('button-reset');
     button.textContent = 'continue';
+
     button.addEventListener('click', () => {
       this.properties.continue = !this.properties.continue;
       document.getElementById('arena').innerHTML = localStorage.getItem('arrSave');
@@ -66,12 +76,15 @@ const Gem = {
       clearInterval(this.timer.str);
       this.init();
     });
+
     return button;
   },
+
   saveButton() {
     const button = document.createElement('button');
     button.classList.add('button-reset');
     button.textContent = 'save';
+
     button.addEventListener('click', () => {
       const arr = [];
       const arena = document.querySelectorAll('.wrap');
@@ -85,6 +98,7 @@ const Gem = {
       localStorage.setItem('time', this.properties.time);
       localStorage.setItem('size', this.properties.size);
     });
+
     return button;
   },
   createArena(sizeArena) {
@@ -126,22 +140,28 @@ const Gem = {
       gem.addEventListener('click', () => {
         this.movebyclick(gem.parentElement.id);
       });
+
       gem.addEventListener('dragstart', (event) => {
         event.target.classList.add('select');
       });
+
       gem.addEventListener('dragend', (event) => {
         event.target.classList.remove('select');
       });
+
       wrapper.addEventListener('dragenter', (event) => {
         event.preventDefault();
       });
+
       wrapper.addEventListener('dragover', (event) => {
         event.preventDefault();
       });
+      
       wrapper.addEventListener('drop', () => {
         this.movebyclick(document.querySelector('.select').parentElement.id);
       });
     }
+
     return arena;
   },
 
@@ -149,6 +169,7 @@ const Gem = {
     clearInterval(this.timer);
     const el = document.createElement('div');
     el.setAttribute('id', 'timer');
+
     this.timer = setInterval(() => {
       this.properties.time++;
       const seconds = this.properties.time % 60;
@@ -164,11 +185,13 @@ const Gem = {
     const button = document.createElement('button');
     button.classList.add('button-reset');
     button.id = 'sound';
+
     if (this.properties.sound) {
       button.textContent = 'sound On';
     } else {
       button.textContent = 'sound Off';
     }
+
     button.addEventListener('click', () => {
       this.toogleSound();
       if (this.properties.sound) {
@@ -177,11 +200,14 @@ const Gem = {
         button.textContent = 'sound Off';
       }
     });
+
     return button;
   },
+
   toogleSound() {
     this.properties.sound = !this.properties.sound;
   },
+
   movebyclick(idWrapper) {
     const move = (direction) => {
       const audio = new Audio('movement_01.mp3');
@@ -208,15 +234,17 @@ const Gem = {
     const down = document.getElementById(idWrapper + this.properties.size);
     const left = document.getElementById(idWrapper - 1);
     const rigt = document.getElementById(idWrapper + 1);
+    
     move(down);
     move(up);
     if (pos !== 1) { move(left); }
     if (pos !== 0) { move(rigt); }
   },
+
   victory() {
     let check = 0;
-
     const wrap = document.getElementsByClassName('wrap');
+
     Array.from(wrap).forEach((el) => {
       if (el.firstChild !== null) {
         el.id == el.firstChild.textContent ? check++ : check;
@@ -270,24 +298,30 @@ const Gem = {
     div.classList.add('sizeArena');
     div.innerHTML = '<h2>size of Arena</h2>';
     div.appendChild(size);
+
     return div;
   },
+
   winList() {
     const div = document.createElement('div');
     div.innerHTML = '<h3>Winners</h3>';
+
     const list = document.createElement('ol');
     div.setAttribute('id', 'winlist');
     div.classList.add('win_list');
+
     if (localStorage.getItem('winners') === null) { return list; }
     const arr = localStorage.getItem('winners').split(',').slice(1, 6);
 
     arr.sort((a, b) => (+a.split(' ')[0]) - (+b.split(' ')[0]));
+
     arr.forEach((winner) => {
       const li = document.createElement('li');
       li.textContent = winner;
       list.appendChild(li);
     });
     div.appendChild(list);
+    
     return div;
   },
 
