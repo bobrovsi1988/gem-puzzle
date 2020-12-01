@@ -175,7 +175,7 @@ const Gem = {
       const seconds = this.properties.time % 60;
       let minuts = this.properties.time / 60;
       minuts %= 60;
-      const str = `${Math.trunc(minuts)} :: ${seconds}`;
+      const str = `${Math.trunc(minuts)} : ${String(seconds).length === 1 ? '0' + seconds : seconds}`;
       el.textContent = str;
     }, 1000);
 
@@ -321,7 +321,7 @@ const Gem = {
       list.appendChild(li);
     });
     div.appendChild(list);
-    
+
     return div;
   },
 
