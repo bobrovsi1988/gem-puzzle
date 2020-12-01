@@ -1,9 +1,12 @@
 {
+  
   "name": "bobrovsi1988-js2020q3",
   "version": "1.0.0",
   "description": "Private repository for @bobrovsi1988",
   "main": "./script.js",
   "scripts": {
+    "build": "webpack",
+    "start": "webpack --watch",
     "lint:fix": "eslint ./**/*.js --fix",
     "lint": "eslint ./",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,6 +22,10 @@
   },
   "homepage": "https://github.com/rolling-scopes-school/bobrovsi1988-JS2020Q3#readme",
   "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/node": "^7.12.6",
+    "@babel/preset-env": "^7.12.7",
     "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",

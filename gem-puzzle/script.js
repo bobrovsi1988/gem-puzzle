@@ -4,13 +4,14 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-plusplus */
 /* eslint-disable linebreak-style */
-const constants = {    
-    RESET_GAME: 'reset',
-    CONTINUE_GAME: 'continue',
-    SAVE_GAME: 'save',
-    
-    };
 
+const { constants } = require('./const.js')// const constants = {    
+//     RESET_GAME: 'reset',
+//     CONTINUE_GAME: 'continue',
+//     SAVE_GAME: 'save',
+    
+//     };
+console.log(constants);
 const Gem = {
   constructor() {
     this.timer;
