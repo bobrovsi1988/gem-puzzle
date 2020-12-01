@@ -226,7 +226,7 @@ const Gem = {
           setTimeout(() => { direction.appendChild(thatEl.firstChild); }, 1000);
           setTimeout(() => { direction.firstChild.classList.remove('animate'); }, 1000);
           this.properties.countMove++;
-          document.getElementById('counter').textContent = this.properties.countMove;
+          document.getElementById('counter').textContent =`Колличество ходов : ${this.properties.countMove}`;
 
           if (this.properties.sound) { audio.play(); }
           this.victory();
