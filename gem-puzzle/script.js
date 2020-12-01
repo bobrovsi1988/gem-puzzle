@@ -218,7 +218,7 @@ const Gem = {
   moveByClick(idWrapper) {
     const move = (direction) => {
       const audio = new Audio('movement_01.mp3');
-      if (!(direction === null)) {
+      if (direction !== null) {
         if (direction.firstChild === null) {
           // eslint-disable-next-line no-use-before-define
           thatEl.firstChild.classList.add('animate');
