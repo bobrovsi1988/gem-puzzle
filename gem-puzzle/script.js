@@ -5,13 +5,8 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable linebreak-style */
 
-const { constants } = require('./const.js')// const constants = {    
-//     RESET_GAME: 'reset',
-//     CONTINUE_GAME: 'continue',
-//     SAVE_GAME: 'save',
-    
-//     };
-console.log(constants);
+const { constants } = require('./const.js');
+
 const Gem = {
   constructor() {
     this.timer;
@@ -184,7 +179,7 @@ const Gem = {
       let minuts = this.properties.time / 60;
       minuts %= 60;
       const str = `${Math.trunc(minuts)} : ${String(seconds).length === 1 ? '0' + seconds : seconds}`;
-      el.textContent = str;
+      el.textContent =constants.TIMER + " : " + str;
     }, 1000);
 
     return el;
