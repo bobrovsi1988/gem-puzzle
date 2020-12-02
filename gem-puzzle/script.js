@@ -222,7 +222,7 @@ const Gem = {
           setTimeout(() => { direction.appendChild(thatEl.firstChild); }, 1000);
           setTimeout(() => { direction.firstChild.classList.remove('animate'); }, 1000);
           this.properties.countMove++;
-          document.getElementById('counter').textContent =`Колличество ходов : ${this.properties.countMove}`;
+          document.getElementById('counter').textContent = `Колличество ходов : ${this.properties.countMove}`;
 
           if (this.properties.sound) { audio.play(); }
           this.victory();
@@ -266,7 +266,7 @@ const Gem = {
       const str = `${Math.trunc(minuts)} : ${String(seconds).length === 1 ? '0' + seconds : seconds}`;
       const elem = document.createElement('div');
       elem.classList.add('victory');
-      elem.textContent = `Ура! Вы решили головоломку за ${str} и ${this.properties.countMove} ходов`;
+      elem.textContent = `${constants.VICTORY_START} ${str} и ${this.properties.countMove} ${constants.VICTORY_END}`;
       document.getElementById('arena').appendChild(elem);
     }
   },
